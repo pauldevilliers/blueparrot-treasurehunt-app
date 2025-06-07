@@ -1,9 +1,20 @@
+import { Link } from 'react-router';
+
 import GameLayout from '@/components/templates/game-layout';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { Link } from 'react-router';
+import { useEffect } from 'react';
+import { congratulationsConfetti } from '@/utils/confetti';
 
 export default function CompletePage() {
+  useEffect(() => {
+    const interval = congratulationsConfetti();
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, []);
   return (
     <GameLayout className="text-center">
       <Text
