@@ -1,8 +1,15 @@
+import { motion } from 'motion/react';
 import Text from '@/components/atoms/text';
 
 type Props = {
   children: React.ReactNode;
   className?: string;
+};
+
+const pageVariants = {
+  initial: { opacity: 0 },
+  in: { opacity: 1 },
+  out: { opacity: 0 },
 };
 
 export default function GameLayout({ children, className }: Props) {
@@ -18,7 +25,16 @@ export default function GameLayout({ children, className }: Props) {
           Jungle
         </Text>
       </div>
-      <div className={className}>{children}</div>
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={{ duration: 0.5 }}
+        className={className}
+      >
+        {children}
+      </motion.div>
     </div>
   );
 }
