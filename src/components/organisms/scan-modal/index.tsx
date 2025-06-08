@@ -14,11 +14,13 @@ type Props = {
 export default function ScanModal({ isOpen, onClose }: Props) {
   const [videoError, setVideoError] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+  const [scanning, setScanning] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
       setVideoError(false);
       setVideoReady(false);
+      setScanning(false);
     }
   }, [isOpen]);
 
@@ -28,10 +30,11 @@ export default function ScanModal({ isOpen, onClose }: Props) {
         className="absolute inset-0 w-[100%] h-[100%] object-cover rounded-md shadow-xl"
         onError={() => setVideoError(true)}
         onReady={() => setVideoReady(true)}
+        scanning={scanning}
       />
       {videoReady ? (
         <FadeIn className="p-4 mt-auto flex flex-col justify-between items-center">
-          <Button>Scan</Button>
+          <Button onClick={() => setScanning(!scanning)}>Scan</Button>
           <Button className="mt-8 mb-5" onClick={onClose}>
             Back
           </Button>
