@@ -22,7 +22,7 @@ export default function InstructionPage() {
       <Text className="text-base tracking-widest text-orange-300 mb-12">
         Good luck!
       </Text>
-      <Link to="/game/1/clues">
+      <Link to="/game/1/clues" className="mt-auto">
         <Button>Play</Button>
       </Link>
     </GameLayout>

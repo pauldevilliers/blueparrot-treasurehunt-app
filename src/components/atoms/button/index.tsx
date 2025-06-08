@@ -5,30 +5,34 @@ type Props = {
   children: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
+  onClick?: () => void;
 };
 
 export default function Button({
   type = 'button',
   className,
   children,
+  onClick,
   ...other
 }: Props) {
   return (
-    <AntButton
-      type={type}
-      className={classNames(
-        className,
-        'w-full max-w-[150px] bg-white uppercase text-orange-500 font-bold'
-      )}
-      style={
-        {
-          '--adm-button-background-color': 'white',
-          '--text-color': 'var(--color-orange-500)',
-        } as React.CSSProperties
-      }
-      {...other}
-    >
-      {children}
-    </AntButton>
+    <div className={classNames(className, 'w-full')}>
+      <AntButton
+        onClick={onClick}
+        type={type}
+        className={classNames(
+          'min-w-[150px] max-w-[100%] bg-white uppercase text-orange-500 font-bold'
+        )}
+        style={
+          {
+            '--adm-button-background-color': 'white',
+            '--text-color': 'var(--color-orange-500)',
+          } as React.CSSProperties
+        }
+        {...other}
+      >
+        {children}
+      </AntButton>
+    </div>
   );
 }

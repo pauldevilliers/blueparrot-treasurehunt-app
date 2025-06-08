@@ -9,7 +9,10 @@ type GameFormProps = {
 
 export default function GameForm({ onSubmit }: GameFormProps) {
   return (
-    <Form onSubmit={onSubmit} className="max-w-xs mx-auto">
+    <Form
+      onSubmit={onSubmit}
+      className="max-w-xs mx-auto flex flex-col flex-grow"
+    >
       <FormInput name="firstName" placeholder="First Name" className="mb-5" />
       <FormInput name="lastName" placeholder="Last Name" className="mb-5" />
       <FormInput name="email" placeholder="Email Address" className="mb-5" />
@@ -20,7 +23,7 @@ export default function GameForm({ onSubmit }: GameFormProps) {
           promotions, and market research."
         className="mb-5"
       />
-      <Button type="submit" className="mx-auto">
+      <Button type="submit" className="mx-auto mt-auto">
         Sign up
       </Button>
     </Form>

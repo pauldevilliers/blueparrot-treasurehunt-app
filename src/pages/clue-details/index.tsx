@@ -1,9 +1,13 @@
+import { Link } from 'react-router';
+import { useState } from 'react';
+
 import GameLayout from '@/components/templates/game-layout';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { Link } from 'react-router';
+import ScanModal from '@/components/organisms/scan-modal';
 
 export default function ClueDetailsPage() {
+  const [showScanModal, setShowScanModal] = useState(false);
   return (
     <GameLayout className="text-center flex flex-col">
       <Text
@@ -21,12 +25,16 @@ export default function ClueDetailsPage() {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </Text>
-      <div className="mb-8">
-        <Button>Play</Button>
+      <div className="mb-8 mt-auto">
+        <Button onClick={() => setShowScanModal(true)}>Play</Button>
       </div>
       <Link to="/game/1/clues">
         <Button>Back</Button>
       </Link>
+      <ScanModal
+        isOpen={showScanModal}
+        onClose={() => setShowScanModal(false)}
+      />
     </GameLayout>
   );
 }

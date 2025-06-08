@@ -29,7 +29,7 @@ export default function CompletePage() {
       <Text className="text-base tracking-widest text-orange-300 mb-12">
         Please check your email to get your discount
       </Text>
-      <Link to="/game/1">
+      <Link to="/game/1" className="mt-auto">
         <Button>Home</Button>
       </Link>
     </GameLayout>
