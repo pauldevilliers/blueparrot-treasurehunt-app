@@ -1,6 +1,9 @@
-import { Checkbox as AntCheckbox } from 'antd-mobile';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { Checkbox as MuiCheckbox } from '@mui/material';
+import { Controller, useFormContext } from 'react-hook-form';
+import classNames from 'classnames';
 
-export type CheckboxProps = {
+type CheckboxProps = {
   name: string;
   label?: string;
   placeholder?: string;
@@ -10,18 +13,33 @@ export type CheckboxProps = {
   error?: string;
 };
 
-const Checkbox = function ({ label, className }: CheckboxProps) {
+const Checkbox = function ({
+  name,
+  label,
+  className,
+  required,
+  ...other
+}: CheckboxProps) {
+  const { control } = useFormContext();
   return (
-    <AntCheckbox
-      style={{
-        alignItems: 'start',
-        flexDirection: 'row-reverse',
-        textAlign: 'left',
-      }}
-      className={className}
-    >
-      <span className="mr-3">{label}</span>
-    </AntCheckbox>
+    <Controller
+      name={name}
+      control={control}
+      rules={{ required }}
+      render={({ field, fieldState }) => (
+        <FormControlLabel
+          {...field}
+          label={label}
+          error={!!fieldState.error}
+          className={classNames(
+            className,
+            'flex flex-row-reverse !items-start !mr-0'
+          )}
+          control={<MuiCheckbox name={name} />}
+          {...other}
+        />
+      )}
+    />
   );
 };
 

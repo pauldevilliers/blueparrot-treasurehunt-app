@@ -1,4 +1,4 @@
-import Text from '@/components/atoms/text';
+import { Typography } from '@mui/material';
 import FadeIn from '@/components/atoms/fade-in';
 import classNames from 'classnames';
 import { useEffect } from 'react';
@@ -48,12 +48,9 @@ export default function GameLayout({ children, className }: Props) {
   return (
     <div className="w-full py-[10vh] min-h-[80vh] flex flex-col">
       <div className="flex justify-center">
-        <Text
-          variant="h1"
-          className="text-5xl/12 font-bold text-orange-500 uppercase mb-12 text-center"
-        >
+        <Typography variant="h1" className="!mb-12 text-center">
           {data.name}
-        </Text>
+        </Typography>
       </div>
       <FadeIn className={classNames('flex-grow flex flex-col', className)}>
         {children}

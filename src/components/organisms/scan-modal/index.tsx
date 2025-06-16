@@ -34,7 +34,9 @@ export default function ScanModal({ isOpen, onClose }: Props) {
       />
       {videoReady ? (
         <FadeIn className="p-4 mt-auto flex flex-col justify-between items-center">
-          <Button onClick={() => setScanning(!scanning)}>Scan</Button>
+          <Button onClick={() => setScanning(!scanning)} className="!mb-5">
+            Scan
+          </Button>
           <Button className="mt-8 mb-5" onClick={onClose}>
             Back
           </Button>

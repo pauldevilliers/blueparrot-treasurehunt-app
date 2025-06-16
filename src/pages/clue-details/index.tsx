@@ -2,10 +2,10 @@ import { Link, useParams } from 'react-router';
 import { useState } from 'react';
 
 import GameLayout from '@/components/templates/game-layout';
-import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import ScanModal from '@/components/organisms/scan-modal';
 import { useAppSelector } from '@/hooks/useAppSelector';
+import { Typography } from '@mui/material';
 
 export default function ClueDetailsPage() {
   const [showScanModal, setShowScanModal] = useState(false);
@@ -17,15 +17,12 @@ export default function ClueDetailsPage() {
 
   return (
     <GameLayout className="text-center flex flex-col">
-      <Text
-        variant="h3"
-        className="text-base text-orange-400 font-semibold uppercase tracking-wide mb-12"
-      >
+      <Typography variant="h3" className="!mb-12">
         {clueItem?.title}
-      </Text>
-      <Text className="text-base tracking-widest text-orange-300 mb-12">
+      </Typography>
+      <Typography className="!mb-12">
         {clueItem?.messageISsmallplaintextbox}
-      </Text>
+      </Typography>
       <div className="mb-8 mt-auto">
         <Button onClick={() => setShowScanModal(true)}>Play</Button>
       </div>

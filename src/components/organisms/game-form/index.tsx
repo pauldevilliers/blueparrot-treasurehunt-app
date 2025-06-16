@@ -4,7 +4,7 @@ import Checkbox from '@/components/atoms/checkbox';
 import getFormField from '@/utils/getFormField';
 
 type GameFormProps = {
-  onSubmit: () => void;
+  onSubmit: (values: { [key: string]: string }) => void;
   game: Game | null;
 };
 
@@ -15,16 +15,16 @@ export default function GameForm({ onSubmit, game }: GameFormProps) {
       onSubmit={onSubmit}
       className="w-full max-w-xs mx-auto flex flex-col flex-grow"
     >
-      {game.fields.map((f) => getFormField(f, { className: 'mb-5' }))}
+      {game.fields.map((f) => getFormField(f, { className: '!mb-8' }))}
       {game.terms_checkbox_wordingISsmallplaintextbox && (
         <Checkbox
           name="terms"
           label={game.terms_checkbox_wordingISsmallplaintextbox}
-          className="mb-5"
+          className="!mb-5"
         />
       )}
       <Button type="submit" className="mx-auto mt-auto">
-        Sign up
+        Play
       </Button>
     </Form>
   );

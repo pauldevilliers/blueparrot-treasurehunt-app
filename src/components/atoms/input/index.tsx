@@ -1,56 +1,45 @@
-import classNames from 'classnames';
-import { Form, Input as AntInput } from 'antd-mobile';
-
-export type InputProps = {
-  name: string;
-  type?: string;
-  label?: string;
-  placeholder?: string;
-  className?: string;
-  inputClassName?: string;
-  required?: boolean;
-  error?: string;
-  rules?: Array<{
-    validator?: () => Promise<Error | undefined>;
-    type: string;
-    message: string;
-  }>;
-};
+import TextField, { type TextFieldProps } from '@mui/material/TextField';
+import { useFormContext, Controller } from 'react-hook-form';
 
 const Input = function ({
   label,
   name,
   type = 'text',
-  placeholder,
-  className,
-  inputClassName,
   required = false,
-  rules = [],
+  variant = 'outlined',
   ...other
-}: InputProps) {
-  const allRules = [{ required, message: 'This field is required' }, ...rules];
+}: TextFieldProps) {
+  const { control } = useFormContext();
+  const rules = {
+    pattern:
+      type === 'email'
+        ? { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Email is not valid' }
+        : undefined,
+  };
   return (
-    <Form.Item
-      name={name}
-      label={label}
-      required={required}
-      className={classNames('rounded-md', className)}
-      style={
-        {
-          '--adm-color-background': '#ccc',
-          '--border-inner': 'transparent',
-          textAlign: 'left',
-        } as React.CSSProperties
-      }
-      rules={allRules}
-    >
-      <AntInput
-        placeholder={placeholder}
-        type={type}
-        className={classNames(inputClassName)}
-        {...other}
-      />
-    </Form.Item>
+    <Controller
+      name={name!}
+      control={control}
+      rules={{
+        required: {
+          value: required,
+          message: 'Required',
+        },
+        ...rules,
+      }}
+      render={({ field, fieldState }) => (
+        <TextField
+          {...field}
+          label={label}
+          variant={variant}
+          type={type}
+          fullWidth
+          error={!!fieldState.error}
+          helperText={fieldState.error?.message}
+          {...other}
+        />
+      )}
+    />
   );
 };
 

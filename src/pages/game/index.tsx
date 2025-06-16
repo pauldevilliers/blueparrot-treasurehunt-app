@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from 'react-router';
 
 import GameLayout from '@/components/templates/game-layout';
-import Text from '@/components/atoms/text';
 import GameForm from '@/components/organisms/game-form';
 import { useAppSelector } from '@/hooks/useAppSelector';
+import { Typography } from '@mui/material';
 
 export default function GamePage() {
   const game = useAppSelector((state) => state.game.data);
@@ -11,19 +11,16 @@ export default function GamePage() {
   const navigate = useNavigate();
   const handleSubmit = (values: { [key: string]: string }) => {
     console.log(values);
-    // navigate(`/game/${gameId}/instruction`);
+    navigate(`/game/${gameId}/instruction`);
   };
   return (
     <GameLayout className="text-center">
-      <Text
-        variant="h2"
-        className="text-3xl text-orange-400 font-semibold uppercase tracking-wide mb-12"
-      >
+      <Typography variant="h2" className="!mb-12">
         {game?.welcome_title}
-      </Text>
-      <Text className="text-base tracking-widest font-semibold text-orange-300 mb-12">
+      </Typography>
+      <Typography variant="h4" className="!mb-12">
         {game?.welcome_messageISsmallplaintextbox}
-      </Text>
+      </Typography>
       <GameForm onSubmit={handleSubmit} game={game} />
     </GameLayout>
   );

@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import Loader from '@/components/atoms/loader';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { fetchSettings } from '@/store/api/settings';
-import { useEffect } from 'react';
 
 type Props = {
   children: React.ReactNode;

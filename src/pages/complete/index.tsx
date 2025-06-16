@@ -1,11 +1,11 @@
 import { Link, useParams } from 'react-router';
 
 import GameLayout from '@/components/templates/game-layout';
-import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { useEffect } from 'react';
 import { congratulationsConfetti } from '@/utils/confetti';
 import { useAppSelector } from '@/hooks/useAppSelector';
+import { Typography } from '@mui/material';
 
 export default function CompletePage() {
   const game = useAppSelector((state) => state.game.data);
@@ -20,15 +20,12 @@ export default function CompletePage() {
   }, []);
   return (
     <GameLayout className="text-center">
-      <Text
-        variant="h2"
-        className="text-3xl text-orange-400 font-semibold uppercase tracking-wide mb-12"
-      >
+      <Typography variant="h2" className="!mb-12">
         {game?.final_congratulations_title}
-      </Text>
-      <Text className="text-base tracking-widest text-orange-300 mb-12">
+      </Typography>
+      <Typography className="!mb-12">
         {game?.final_congratulations_messageISsmallplaintextbox}
-      </Text>
+      </Typography>
       <Link to={`/game/${gameId}`} className="mt-auto">
         <Button>Home</Button>
       </Link>

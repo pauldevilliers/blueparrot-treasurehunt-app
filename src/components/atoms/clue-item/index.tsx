@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import Text from '../text';
+import { Typography } from '@mui/material';
 
 type Props = {
   final?: boolean;
@@ -17,7 +17,11 @@ export default function ClueItem({ final = false, label }: Props) {
         }
       )}
     >
-      {label && <Text className="text-5xl">{label}</Text>}
+      {label && (
+        <Typography variant="h4" className="!text-5xl">
+          {label}
+        </Typography>
+      )}
     </div>
   );
 }
