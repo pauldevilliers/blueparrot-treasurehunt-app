@@ -20,7 +20,7 @@ export default function GameForm({ onSubmit, game }: GameFormProps) {
         <Checkbox
           name="terms"
           label={game.terms_checkbox_wordingISsmallplaintextbox}
-          className="!mb-5"
+          className="!mb-8"
         />
       )}
       <Button type="submit" className="mx-auto mt-auto">

@@ -3,6 +3,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Button from '@/components/atoms/button';
 import classNames from 'classnames';
 import { useFormContext, Controller } from 'react-hook-form';
+import { Box, FormHelperText } from '@mui/material';
 
 type Props = {
   className?: string;
@@ -34,27 +35,36 @@ export default function UploadFile({
     <Controller
       name={name!}
       control={control}
-      defaultValue=""
-      rules={{ required }}
-      render={() => (
-        <Button
-          component="label"
-          role={undefined}
-          variant="outlined"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-          className={classNames(
-            className,
-            '!w-full h-[56px] !bg-gray-700 !border-none'
+      rules={{
+        required: {
+          value: required,
+          message: 'Required',
+        },
+      }}
+      render={({ field, fieldState }) => (
+        <Box className={classNames(className, 'relative')}>
+          <Button
+            component="label"
+            role={undefined}
+            variant="outlined"
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+            className={classNames('!w-full h-[56px] !bg-gray-700', {
+              '!border-red-500': !!fieldState.error,
+              '!border-none': !fieldState.error,
+            })}
+          >
+            {label || 'Upload files'}
+            <VisuallyHiddenInput
+              type="file"
+              onChange={(event) => field.onChange(event.target.files)}
+              multiple={false}
+            />
+          </Button>
+          {fieldState.error && (
+            <FormHelperText error>{fieldState.error.message}</FormHelperText>
           )}
-        >
-          {label || 'Upload files'}
-          <VisuallyHiddenInput
-            type="file"
-            onChange={(event) => console.log(event.target.files)}
-            multiple
-          />
-        </Button>
+        </Box>
       )}
     />
   );

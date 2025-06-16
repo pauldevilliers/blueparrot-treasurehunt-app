@@ -1,5 +1,6 @@
 import Input from '@/components/atoms/input';
 import DatePicker from '@/components/atoms/date-picker';
+import DateTimePicker from '@/components/atoms/date-time-picker';
 import UploadFile from '@/components/atoms/upload-file';
 import { parseLabel } from './common';
 
@@ -23,7 +24,7 @@ export default function getFormField(
     case 'date':
       return <DatePicker key={field} {...props} />;
     case 'datetime':
-      return <DatePicker key={field} {...props} />;
+      return <DateTimePicker key={field} {...props} />;
     case 'file':
       return <UploadFile key={field} {...props} />;
     default:

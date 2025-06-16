@@ -1,15 +1,15 @@
 import {
-  DatePicker as MuiDatePicker,
-  type DatePickerProps,
-} from '@mui/x-date-pickers/DatePicker';
+  DateTimePicker as MuiDateTimePicker,
+  type DateTimePickerProps,
+} from '@mui/x-date-pickers/DateTimePicker';
 import { Controller, useFormContext } from 'react-hook-form';
 
-interface Props extends DatePickerProps {
+interface Props extends DateTimePickerProps {
   name: string;
   required?: boolean;
 }
 
-export default function DatePicker({
+export default function DateTimePicker({
   name,
   required = false,
   ...props
@@ -26,7 +26,7 @@ export default function DatePicker({
         },
       }}
       render={({ fieldState, field }) => (
-        <MuiDatePicker
+        <MuiDateTimePicker
           slotProps={{
             textField: {
               variant: 'outlined',

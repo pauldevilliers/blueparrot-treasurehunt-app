@@ -1,7 +1,10 @@
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { Checkbox as MuiCheckbox } from '@mui/material';
+import {
+  Checkbox as MuiCheckbox,
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+} from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
-import classNames from 'classnames';
 
 type CheckboxProps = {
   name: string;
@@ -18,7 +21,6 @@ const Checkbox = function ({
   label,
   className,
   required,
-  ...other
 }: CheckboxProps) {
   const { control } = useFormContext();
   return (
@@ -26,18 +28,24 @@ const Checkbox = function ({
       name={name}
       control={control}
       rules={{ required }}
-      render={({ field, fieldState }) => (
-        <FormControlLabel
-          {...field}
-          label={label}
-          error={!!fieldState.error}
-          className={classNames(
-            className,
-            'flex flex-row-reverse !items-start !mr-0'
+      render={({ fieldState }) => (
+        <FormControl error={!!fieldState.error} className={className}>
+          <Controller
+            name="terms"
+            control={control}
+            rules={{ required: 'Please accept our Terms and Conditions' }}
+            render={({ field }) => (
+              <FormControlLabel
+                className={'flex flex-row-reverse !items-start !mr-0'}
+                control={<MuiCheckbox {...field} checked={field.value} />}
+                label={label}
+              />
+            )}
+          />
+          {fieldState.error && (
+            <FormHelperText>{fieldState.error?.message}</FormHelperText>
           )}
-          control={<MuiCheckbox name={name} />}
-          {...other}
-        />
+        </FormControl>
       )}
     />
   );
