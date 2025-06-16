@@ -20,7 +20,7 @@ export default function DatePicker({
       name={name}
       control={control}
       rules={{ required }}
-      render={({ field, fieldState }) => (
+      render={() => (
         <MuiDatePicker
           slotProps={{
             textField: {

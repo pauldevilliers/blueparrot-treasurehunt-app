@@ -36,7 +36,7 @@ export default function UploadFile({
       control={control}
       defaultValue=""
       rules={{ required }}
-      render={({ field, fieldState }) => (
+      render={() => (
         <Button
           component="label"
           role={undefined}
