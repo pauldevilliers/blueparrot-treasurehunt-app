@@ -26,3 +26,9 @@ body {
   background: black;
   color: #eee;
 }
+
+.adm-form-item-feedback-error {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+}

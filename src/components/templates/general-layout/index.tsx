@@ -1,15 +1,19 @@
 import Loader from '@/components/atoms/loader';
-import { useEffect, useState } from 'react';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { fetchSettings } from '@/store/api/settings';
+import { useEffect } from 'react';
 
 type Props = {
   children: React.ReactNode;
 };
 
 export default function GeneralLayout({ children }: Props) {
-  const [loading, setLoading] = useState(true);
+  const { loading } = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
+    dispatch(fetchSettings());
   }, []);
 
   if (loading) {

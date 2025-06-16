@@ -10,6 +10,11 @@ export type InputProps = {
   inputClassName?: string;
   required?: boolean;
   error?: string;
+  rules?: Array<{
+    validator?: () => Promise<Error | undefined>;
+    type: string;
+    message: string;
+  }>;
 };
 
 const Input = function ({
@@ -20,18 +25,30 @@ const Input = function ({
   className,
   inputClassName,
   required = false,
+  rules = [],
+  ...other
 }: InputProps) {
+  const allRules = [{ required, message: 'This field is required' }, ...rules];
   return (
     <Form.Item
       name={name}
       label={label}
       required={required}
       className={classNames('rounded-md', className)}
+      style={
+        {
+          '--adm-color-background': '#ccc',
+          '--border-inner': 'transparent',
+          textAlign: 'left',
+        } as React.CSSProperties
+      }
+      rules={allRules}
     >
       <AntInput
         placeholder={placeholder}
         type={type}
-        className={classNames(inputClassName, 'px-3')}
+        className={classNames(inputClassName)}
+        {...other}
       />
     </Form.Item>
   );

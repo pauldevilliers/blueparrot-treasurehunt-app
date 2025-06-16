@@ -9,6 +9,6 @@ export default defineConfig({
     alias: { '@': '/src' },
   },
   server: {
-    port: 3008,
+    port: 3009,
   },
 });

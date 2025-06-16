@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { settingsApi } from './slices/settings';
+import settingsReducer from './slices/settings';
+import gameReducer from './slices/game';
 
 const store = configureStore({
   reducer: {
-    [settingsApi.reducerPath]: settingsApi.reducer,
+    settings: settingsReducer,
+    game: gameReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(settingsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

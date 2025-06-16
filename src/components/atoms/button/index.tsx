@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Button as AntButton } from 'antd-mobile';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
 type Props = {
   children: React.ReactNode;
@@ -15,6 +16,8 @@ export default function Button({
   onClick,
   ...other
 }: Props) {
+  const game = useAppSelector((state) => state.game.data);
+
   return (
     <div className={classNames(className, 'w-full')}>
       <AntButton
@@ -25,8 +28,11 @@ export default function Button({
         )}
         style={
           {
-            '--adm-button-background-color': 'white',
-            '--text-color': 'var(--color-orange-500)',
+            '--adm-button-background-color':
+              game?.overall_button_color || 'white',
+            '--text-color':
+              game?.overall_button_text_color || 'var(--color-orange-500)',
+            border: 'none',
           } as React.CSSProperties
         }
         {...other}

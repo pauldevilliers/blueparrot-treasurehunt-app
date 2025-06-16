@@ -20,7 +20,7 @@ const Checkbox = function ({ label, className }: CheckboxProps) {
       }}
       className={className}
     >
-      {label}
+      <span className="mr-3">{label}</span>
     </AntCheckbox>
   );
 };

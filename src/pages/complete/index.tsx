@@ -1,12 +1,15 @@
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 import GameLayout from '@/components/templates/game-layout';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { useEffect } from 'react';
 import { congratulationsConfetti } from '@/utils/confetti';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
 export default function CompletePage() {
+  const game = useAppSelector((state) => state.game.data);
+  const { gameId } = useParams();
   useEffect(() => {
     const interval = congratulationsConfetti();
     return () => {
@@ -21,15 +24,12 @@ export default function CompletePage() {
         variant="h2"
         className="text-3xl text-orange-400 font-semibold uppercase tracking-wide mb-12"
       >
-        Congratulations
+        {game?.final_congratulations_title}
       </Text>
       <Text className="text-base tracking-widest text-orange-300 mb-12">
-        You found all the objects
+        {game?.final_congratulations_messageISsmallplaintextbox}
       </Text>
-      <Text className="text-base tracking-widest text-orange-300 mb-12">
-        Please check your email to get your discount
-      </Text>
-      <Link to="/game/1" className="mt-auto">
+      <Link to={`/game/${gameId}`} className="mt-auto">
         <Button>Home</Button>
       </Link>
     </GameLayout>

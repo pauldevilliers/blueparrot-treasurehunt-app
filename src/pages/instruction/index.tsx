@@ -1,28 +1,24 @@
 import GameLayout from '@/components/templates/game-layout';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
 export default function InstructionPage() {
+  const game = useAppSelector((state) => state.game.data);
+  const { gameId } = useParams();
   return (
     <GameLayout className="text-center">
       <Text
         variant="h2"
         className="text-3xl text-orange-400 font-semibold uppercase tracking-wide mb-12"
       >
-        How to play
+        {game?.how_to_play_title}
       </Text>
       <Text className="text-base tracking-widest text-orange-300 mb-12">
-        Collect all 6 objects to get your 15% discount via email.
+        {game?.how_to_play_messageISsmallplaintextbox}
       </Text>
-      <Text className="text-base tracking-widest text-orange-300 mb-12">
-        Use the clues to find each object hidden in the venue - you can find the
-        first 5 in any order you want. Find all 5 to unlock the final clue.
-      </Text>
-      <Text className="text-base tracking-widest text-orange-300 mb-12">
-        Good luck!
-      </Text>
-      <Link to="/game/1/clues" className="mt-auto">
+      <Link to={`/game/${gameId}/clues`} className="mt-auto">
         <Button>Play</Button>
       </Link>
     </GameLayout>

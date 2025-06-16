@@ -1,3 +1,5 @@
+import { useAppSelector } from '@/hooks/useAppSelector';
+
 type TextProps = {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   className?: string;
@@ -9,6 +11,14 @@ export default function Text({
   className,
   variant = 'p',
 }: TextProps) {
+  const game = useAppSelector((state) => state.game.data);
   const Tag = variant;
-  return <Tag className={className}>{children}</Tag>;
+  return (
+    <Tag
+      className={className}
+      style={{ color: game?.overall_text_color || '' }}
+    >
+      {children}
+    </Tag>
+  );
 }
