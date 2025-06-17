@@ -6,7 +6,7 @@ import { fetchGame } from '@/store/api/game';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import Loader from '@/components/atoms/loader';
-import { useParams, useMatch, Navigate, useNavigate } from 'react-router';
+import { useParams, useMatch } from 'react-router';
 import NotFoundPage from '@/pages/not-found';
 import { getStoredGameById } from '@/utils/localstorage';
 import links from '@/config/links';
@@ -21,7 +21,7 @@ export default function GameLayout({ children, className }: Props) {
   const { gameId } = useParams();
   const startScreenMatch = useMatch(links.game.path);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const storedGame = getStoredGameById(gameId);
