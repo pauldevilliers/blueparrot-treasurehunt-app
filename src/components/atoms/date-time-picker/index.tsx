@@ -2,6 +2,7 @@ import {
   DateTimePicker as MuiDateTimePicker,
   type DateTimePickerProps,
 } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs from 'dayjs';
 import { Controller, useFormContext } from 'react-hook-form';
 
 interface Props extends DateTimePickerProps {
@@ -37,7 +38,11 @@ export default function DateTimePicker({
               helperText: fieldState.error?.message,
             },
           }}
-          onChange={field.onChange}
+          onChange={(date) => {
+            const formatted = date ? date.format('D MMM YYYY HH:mm A') : '';
+            field.onChange(formatted);
+          }}
+          value={field.value ? dayjs(field.value, 'D MMM YYYY HH:mm A') : null}
           {...props}
         />
       )}

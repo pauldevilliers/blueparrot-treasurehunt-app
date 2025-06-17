@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import MuiButton, { type ButtonProps } from '@mui/material/Button';
 
 interface Props extends ButtonProps {
@@ -5,6 +6,7 @@ interface Props extends ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   className?: string;
   onClick?: () => void;
+  loading?: boolean;
 }
 
 export default function Button({
@@ -12,6 +14,7 @@ export default function Button({
   className,
   children,
   onClick,
+  loading,
   ...other
 }: Props) {
   return (
@@ -20,6 +23,10 @@ export default function Button({
       type={type}
       variant="contained"
       className={className}
+      disabled={loading}
+      startIcon={
+        loading ? <CircularProgress size={20} color="inherit" /> : null
+      }
       {...other}
     >
       {children}

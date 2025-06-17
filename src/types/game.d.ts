@@ -31,3 +31,9 @@ type Game = {
   clues: { [key: string]: ClueItem };
   fields: Array<FormField>;
 };
+
+type GameResponse = {
+  game_id: string;
+  user_id: number;
+  stage_completed: number;
+};

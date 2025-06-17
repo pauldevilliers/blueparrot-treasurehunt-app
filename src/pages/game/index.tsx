@@ -4,14 +4,18 @@ import GameLayout from '@/components/templates/game-layout';
 import GameForm from '@/components/organisms/game-form';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { Typography } from '@mui/material';
+import { startGame } from '@/store/api/game';
+import { storeGame } from '@/utils/localstorage';
 
 export default function GamePage() {
   const game = useAppSelector((state) => state.game.data);
   const { gameId } = useParams();
   const navigate = useNavigate();
   const handleSubmit = (values: { [key: string]: string }) => {
-    console.log(values);
-    navigate(`/game/${gameId}/instruction`);
+    return startGame(gameId!, values).then((game) => {
+      storeGame(game);
+      navigate(`/game/${gameId}/instruction`);
+    });
   };
   return (
     <GameLayout className="text-center">

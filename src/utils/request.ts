@@ -21,7 +21,9 @@ const request = async (
     headers,
   };
 
-  if (body) {
+  if (body instanceof FormData) {
+    options.body = body;
+  } else if (body) {
     options.body = JSON.stringify(body);
   }
 

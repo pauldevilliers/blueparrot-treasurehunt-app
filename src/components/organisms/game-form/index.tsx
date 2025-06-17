@@ -1,4 +1,3 @@
-import Button from '@/components/atoms/button';
 import Form from '@/components/molecules/form';
 import Checkbox from '@/components/atoms/checkbox';
 import getFormField from '@/utils/getFormField';
@@ -14,6 +13,7 @@ export default function GameForm({ onSubmit, game }: GameFormProps) {
     <Form
       onSubmit={onSubmit}
       className="w-full max-w-xs mx-auto flex flex-col flex-grow"
+      submitLabel="Play"
     >
       {game.fields.map((f) => getFormField(f, { className: '!mb-8' }))}
       {game.terms_checkbox_wordingISsmallplaintextbox && (
@@ -23,9 +23,6 @@ export default function GameForm({ onSubmit, game }: GameFormProps) {
           className="!mb-8"
         />
       )}
-      <Button type="submit" className="mx-auto mt-auto">
-        Play
-      </Button>
     </Form>
   );
 }

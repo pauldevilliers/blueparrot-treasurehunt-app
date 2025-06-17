@@ -57,7 +57,7 @@ export default function UploadFile({
             {label || 'Upload files'}
             <VisuallyHiddenInput
               type="file"
-              onChange={(event) => field.onChange(event.target.files)}
+              onChange={(event) => field.onChange(event.target.files?.[0])}
               multiple={false}
             />
           </Button>
