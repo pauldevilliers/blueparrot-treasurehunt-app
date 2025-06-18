@@ -4,6 +4,7 @@ import Button from '@/components/atoms/button';
 import classNames from 'classnames';
 import { useFormContext, Controller } from 'react-hook-form';
 import { Box, FormHelperText } from '@mui/material';
+import { fileToBase64 } from '@/utils/common';
 
 type Props = {
   className?: string;
@@ -23,6 +24,17 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
+
+const handleParseFile = async (file?: File) => {
+  if (!file) return null;
+  const data = await fileToBase64(file);
+  return {
+    name: file.name,
+    size: file.size,
+    type: file.type,
+    data,
+  };
+};
 
 export default function UploadFile({
   className,
@@ -57,7 +69,9 @@ export default function UploadFile({
             {label || 'Upload files'}
             <VisuallyHiddenInput
               type="file"
-              onChange={(event) => field.onChange(event.target.files?.[0])}
+              onChange={(e) =>
+                handleParseFile(e.target.files?.[0]).then(field.onChange)
+              }
               multiple={false}
             />
           </Button>

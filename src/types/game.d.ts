@@ -11,6 +11,8 @@ type FormField = {
 };
 
 type Game = {
+  _id: string;
+
   name: string;
   welcome_title: string;
   welcome_messageISsmallplaintextbox: string;
@@ -36,4 +38,17 @@ type GameResponse = {
   game_id: string;
   user_id: number;
   stage_completed: number;
+};
+
+type FileObject = {
+  name: string;
+  size: number;
+  type: string;
+  data: string;
+};
+
+type GamePatchObject = {
+  user_id?: number;
+  clue_number?: number | string;
+  imageISfile: FileObject;
 };

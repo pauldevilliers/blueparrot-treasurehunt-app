@@ -6,10 +6,8 @@ import { fetchGame } from '@/store/api/game';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import Loader from '@/components/atoms/loader';
-import { useParams, useMatch } from 'react-router';
+import { useParams } from 'react-router';
 import NotFoundPage from '@/pages/not-found';
-import { getStoredGameById } from '@/utils/localstorage';
-import links from '@/config/links';
 
 type Props = {
   children: React.ReactNode;
@@ -19,16 +17,9 @@ type Props = {
 export default function GameLayout({ children, className }: Props) {
   const { loading, data, id } = useAppSelector((state) => state.game);
   const { gameId } = useParams();
-  const startScreenMatch = useMatch(links.game.path);
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
 
   useEffect(() => {
-    const storedGame = getStoredGameById(gameId);
-    console.log(startScreenMatch, storedGame);
-    // if (!startScreenMatch && !storedGame) {
-    //   navigate(`/game/${gameId}`);
-    // }
     if (!data || id !== gameId) {
       dispatch(fetchGame(gameId!));
     }
@@ -55,7 +46,7 @@ export default function GameLayout({ children, className }: Props) {
     return <NotFoundPage />;
   }
   return (
-    <div className="w-full py-[10vh] min-h-[80vh] flex flex-col">
+    <div className="w-full py-[10vh] min-h-[80vh] flex flex-col !box-content">
       <div className="flex justify-center">
         <Typography variant="h1" className="!mb-12 text-center">
           {data.name}

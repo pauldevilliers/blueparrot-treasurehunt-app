@@ -4,6 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import GeneralLayout from '@/components/templates/general-layout';
+import Private from '@/components/templates/private';
 import links from '@/config/links';
 import GamePage from '@/pages/game';
 import InstructionPage from '@/pages/instruction';
@@ -25,16 +26,18 @@ function App() {
         <GeneralLayout>
           <Routes>
             <Route path={links.game.path} element={<GamePage />} />
-            <Route
-              path={links.instruction.path}
-              element={<InstructionPage />}
-            />
-            <Route path={links.clues.path} element={<CluesPage />} />
-            <Route
-              path={links.clueDetails.path}
-              element={<ClueDetailsPage />}
-            />
-            <Route path={links.complete.path} element={<CompletePage />} />
+            <Route path={links.game.path} element={<Private />}>
+              <Route
+                path={links.instruction.path}
+                element={<InstructionPage />}
+              />
+              <Route path={links.clues.path} element={<CluesPage />} />
+              <Route
+                path={links.clueDetails.path}
+                element={<ClueDetailsPage />}
+              />
+              <Route path={links.complete.path} element={<CompletePage />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </GeneralLayout>

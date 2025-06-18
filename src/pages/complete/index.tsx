@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 import GameLayout from '@/components/templates/game-layout';
 import Button from '@/components/atoms/button';
@@ -6,10 +6,12 @@ import { useEffect } from 'react';
 import { congratulationsConfetti } from '@/utils/confetti';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { Typography } from '@mui/material';
+import { clearStoredGames } from '@/utils/localstorage';
 
 export default function CompletePage() {
   const game = useAppSelector((state) => state.game.data);
   const { gameId } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     const interval = congratulationsConfetti();
     return () => {
@@ -18,6 +20,10 @@ export default function CompletePage() {
       }
     };
   }, []);
+  const handleComplete = () => {
+    clearStoredGames();
+    navigate(`/game/${gameId}`);
+  };
   return (
     <GameLayout className="text-center">
       <Typography variant="h2" className="!mb-12">
@@ -26,9 +32,9 @@ export default function CompletePage() {
       <Typography className="!mb-12">
         {game?.final_congratulations_messageISsmallplaintextbox}
       </Typography>
-      <Link to={`/game/${gameId}`} className="mt-auto">
-        <Button>Home</Button>
-      </Link>
+      <Button onClick={handleComplete} className="mt-auto">
+        Home
+      </Button>
     </GameLayout>
   );
 }

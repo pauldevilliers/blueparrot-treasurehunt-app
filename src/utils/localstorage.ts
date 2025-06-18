@@ -7,8 +7,10 @@ export const getStoredGames = (): Array<GameResponse> => {
   return JSON.parse(ls_item);
 };
 
-export const getStoredGameById = (id?: string | null) =>
-  getStoredGames().find((g) => g.game_id !== id);
+export const getStoredGameById = (id?: string | null): GameResponse => {
+  const sessions = getStoredGames();
+  return sessions.find((g) => g.game_id === id) as GameResponse;
+};
 
 export const storeGame = (game: GameResponse) => {
   const currentGames = getStoredGames();

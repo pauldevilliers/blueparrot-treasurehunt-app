@@ -1,4 +1,4 @@
-import { get, post } from '@/utils/request';
+import { get, patch, post } from '@/utils/request';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchGame = createAsyncThunk(
@@ -10,9 +10,9 @@ export const startGame = (
   gameId: string,
   values: { [key: string]: string | Blob }
 ) => {
-  // const formData = new FormData();
-  // Object.entries(values).forEach(([key, value]) => {
-  //   formData.append(key, value);
-  // });
   return post(`/app/games/treasurehunt/${gameId}`, { form_data: values });
+};
+
+export const progressGame = (gameId: string, values: GamePatchObject) => {
+  return patch(`/app/games/treasurehunt/${gameId}`, values);
 };

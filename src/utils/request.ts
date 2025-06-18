@@ -21,9 +21,7 @@ const request = async (
     headers,
   };
 
-  if (body instanceof FormData) {
-    options.body = body;
-  } else if (body) {
+  if (body) {
     options.body = JSON.stringify(body);
   }
 
@@ -49,7 +47,9 @@ const post = (url: string, body: unknown, headers?: Headers) =>
   request(url, 'POST', body, headers);
 const put = (url: string, body: unknown, headers?: Headers) =>
   request(url, 'PUT', body, headers);
+const patch = (url: string, body: unknown, headers?: Headers) =>
+  request(url, 'PATCH', body, headers);
 const remove = (url: string, headers?: Headers) =>
   request(url, 'DELETE', null, headers);
 
-export { request, get, post, put, remove };
+export { request, get, post, put, patch, remove };
