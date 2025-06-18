@@ -21,7 +21,7 @@ export default function InstructionPage() {
     <ClueItem
       final={key === 'final'}
       label={label}
-      disabled
+      disabled={disabled}
       key={key}
       className={classNames({ 'mx-auto': key === 'final' })}
       onClick={() => !disabled && navigate(`/game/${gameId}/clues/${key}`)}
