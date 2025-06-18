@@ -6,6 +6,7 @@ type Props = {
   label?: string | number;
   disabled?: boolean;
   className?: string;
+  onClick: () => void;
 };
 
 export default function ClueItem({
@@ -13,6 +14,7 @@ export default function ClueItem({
   label,
   disabled = false,
   className,
+  onClick,
 }: Props) {
   return (
     <div
@@ -26,6 +28,7 @@ export default function ClueItem({
         },
         className
       )}
+      onClick={onClick}
     >
       {label && (
         <Typography variant="h4" className="!text-5xl">
